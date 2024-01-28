@@ -1565,6 +1565,23 @@ files = [
 test = ["enum34", "ipaddress", "mock", "pywin32", "wmi"]
 
 [[package]]
+name = "pt_core_news_sm"
+version = "3.7.0"
+description = "Portuguese pipeline optimized for CPU. Components: tok2vec, morphologizer, parser, lemmatizer (trainable_lemmatizer), senter, ner, attribute_ruler."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pt_core_news_sm-3.7.0.tar.gz", hash = "sha256:b86d2fcb022bbe1dffa8692852c9094591e93d0299b65c5bdf92f7940ae2c47c"},
+]
+
+[package.dependencies]
+spacy = ">=3.7.0,<3.8.0"
+
+[package.source]
+type = "url"
+url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_sm-3.7.0/pt_core_news_sm-3.7.0.tar.gz"
+
+[[package]]
 name = "ptyprocess"
 version = "0.7.0"
 description = "Run a subprocess in a pseudo terminal"
@@ -2855,4 +2872,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "8e5ae9bef0ca4091ca65c7cda34d4251f0feae9daa3ba7de3afaf6d4b4f70899"
+content-hash = "e2958406d4d30617bbd38432b7ca5bd5baf0affafb8e99ae358c36c2f6b6a72b"

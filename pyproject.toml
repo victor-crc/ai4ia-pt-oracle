@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 pydantic = "^2.5.3"
 spacy = "^3.7.2"
+pt_core_news_sm = {url = "https://github.com/explosion/spacy-models/releases/download/pt_core_news_sm-3.7.0/pt_core_news_sm-3.7.0.tar.gz"}
 tqdm = "^4.66.1"
 pandas = "^2.2.0"
 pandera = "^0.18.0"

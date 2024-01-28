@@ -460,7 +460,8 @@ class NoiseReducer:
             Rules.RANDOM_SUBTITLES.value: random_subtitles,
         }
 
-    def find_titles(self, df):
+    # TODO: Refactor to return only indices (instead of text series)
+    def find_titles(self, df) -> pd.Series:
         """Titles (e.g. "Capítulo", "Artigo", "Secção" e "Subsecção")."""
         pattern = "|".join([title_pattern.pat for title_pattern in CasedTitlesPatterns])
         return df.text[df.text.str.match(pat=pattern, case=True)]
@@ -471,6 +472,7 @@ class NoiseReducer:
             df.text.str.match(pat=pattern_config.pat, case=pattern_config.case)
         ]
 
+    # TODO: Refactor to return only indices (instead of text series)
     def find_subtitles(self, df, titles):
         """Subtitles"""
         # Start by selecting all passages following the identified titles.
