@@ -762,11 +762,21 @@ class NoiseReducer:
     # ===================================================================================== #
 
     def _safe_check_if_is_punct(self, nlp_doc: SpacyDoc) -> bool:
-        return nlp_doc[-1].is_punct
+        # return nlp_doc[-1].is_punct
+        try:
+            is_punct = nlp_doc[-1].is_punct
+        except IndexError:
+            is_punct = True
+        return is_punct
 
     # --------------------------------------------------------------------------- #
     def _safe_check_if_is_word(self, nlp_doc: SpacyDoc) -> bool:
-        return self._is_it_word_shape(nlp_doc[-1].shape_)
+        # return self._is_it_word_shape(nlp_doc[-1].shape_)
+        try:
+            is_word = self._is_it_word_shape(nlp_doc[-1].shape_)
+        except IndexError:
+            is_word = False
+        return is_word
 
     def _is_it_word_shape(self, string_shape: str) -> bool:
         search = re.compile(r"[^Xx\-]").search
