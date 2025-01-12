@@ -24,7 +24,7 @@ def normalize_text(df: pd.DataFrame, inputs_key) -> pd.DataFrame:
     - Strip leading and trailing white spaces.
     """
     temp_df = df.copy()
-    marker_pattern = "^[0-9]+\s\-\s?|^\d+(?:\.\d+)+\s\-\s?|^[a-z]+\)\s?"
+    marker_pattern = r"^[0-9]+\s\-\s?|^\d+(?:\.\d+)+\s\-\s?|^[a-z]+\)\s?"
     temp_df[inputs_key] = temp_df[inputs_key].str.replace(
         pat=marker_pattern, repl="", regex=True
     )
@@ -102,42 +102,42 @@ class PatternConfig:
 
 
 class TitlesPatterns(PatternConfig, Enum):
-    ARTICLES = "^«?(ARTIGO\s)?\d+.º(\-[a-z]+)?»?$", False
-    ANNEXES = "^«?(ANEXO|Anexo)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    APPENDICES = "^«?(APÊNDICE|Apêndice)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    ARTICLES = r"^«?(ARTIGO\s)?\d+.º(\-[a-z]+)?»?$", False
+    ANNEXES = r"^«?(ANEXO|Anexo)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    APPENDICES = r"^«?(APÊNDICE|Apêndice)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
     CHAPTERS = (
-        "^«?(CAPÍTULO|Capítulo)(\s+[A-Z0-9]+(.[A-Z0-9]+)?|\s+(ÚNICO|Único))?»?$",
+        r"^«?(CAPÍTULO|Capítulo)(\s+[A-Z0-9]+(.[A-Z0-9]+)?|\s+(ÚNICO|Único))?»?$",
         True,
     )
-    BOOKS = "^«?LIVRO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    TITLES = "^«?(TÍTULO|Título)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    DIVISIONS = "^«?DIVISÃO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", False
-    SUBDIVISIONS = "^«?SUBDIVISÃO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", False
-    PARTS = "^«?(PARTE|Parte)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    SECTIONS = "^«?(SECÇÃO|Secção|SEÇÃO|Seção)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    SUBSECTIONS = "^«?(SUBSECÇÃO|SUBSEÇÃO)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", False
+    BOOKS = r"^«?LIVRO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    TITLES = r"^«?(TÍTULO|Título)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    DIVISIONS = r"^«?DIVISÃO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", False
+    SUBDIVISIONS = r"^«?SUBDIVISÃO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", False
+    PARTS = r"^«?(PARTE|Parte)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    SECTIONS = r"^«?(SECÇÃO|Secção|SEÇÃO|Seção)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    SUBSECTIONS = r"^«?(SUBSECÇÃO|SUBSEÇÃO)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", False
 
 
 class CasedTitlesPatterns(PatternConfig, Enum):
-    ARTICLES = "^«?((ARTIGO|Artigo)\s)?\d+.º(\-[A-Za-z]+)?»?$", True
-    ANNEXES = "^«?(ANEXO|Anexo)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    APPENDICES = "^«?(APÊNDICE|Apêndice)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    BASES = "^«?(BASE|Base)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    ARTICLES = r"^«?((ARTIGO|Artigo)\s)?\d+.º(\-[A-Za-z]+)?»?$", True
+    ANNEXES = r"^«?(ANEXO|Anexo)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    APPENDICES = r"^«?(APÊNDICE|Apêndice)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    BASES = r"^«?(BASE|Base)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
     CHAPTERS = (
-        "^«?(CAPÍTULO|Capítulo)(\s+[A-Z0-9]+(.[A-Z0-9]+)?|\s+(ÚNICO|Único))?»?$",
+        r"^«?(CAPÍTULO|Capítulo)(\s+[A-Z0-9]+(.[A-Z0-9]+)?|\s+(ÚNICO|Único))?»?$",
         True,
     )
-    BOOKS = "^«?LIVRO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    TITLES = "^«?(TÍTULO|Título)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    DIVISIONS = "^«?(DIVISÃO|Divisão)(\s[A-Za-z0-9]+(.[A-Za-z0-9]+)?)?»?$", True
-    SUBDIVISIONS = "^«?(SUBDIVISÃO|Subdivisão)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    PARTS = "^«?(PARTE|Parte)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
-    SECTIONS = "^«?(SECÇÃO|Secção|SEÇÃO|Seção)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    BOOKS = r"^«?LIVRO(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    TITLES = r"^«?(TÍTULO|Título)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    DIVISIONS = r"^«?(DIVISÃO|Divisão)(\s[A-Za-z0-9]+(.[A-Za-z0-9]+)?)?»?$", True
+    SUBDIVISIONS = r"^«?(SUBDIVISÃO|Subdivisão)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    PARTS = r"^«?(PARTE|Parte)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
+    SECTIONS = r"^«?(SECÇÃO|Secção|SEÇÃO|Seção)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$", True
 
     # The change to case sensitive for the `SUBSECTIONS` rule actually improved compared to
     # case insensitive. Now it ignores the 'SUBSECÇãO I' wrong instance (it is a subtitle).
     SUBSECTIONS = (
-        "^«?(SUBSECÇÃO|SUBSEÇÃO|Subsecção|Subseção)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$",
+        r"^«?(SUBSECÇÃO|SUBSEÇÃO|Subsecção|Subseção)(\s[A-Z0-9]+(.[A-Z0-9]+)?)?»?$",
         True,
     )
 
@@ -417,9 +417,6 @@ class NoiseReducer:
                 )
                 for section in sections
             ]
-            # ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-            passages_to_keep = passages_to_keep.iloc[1:]  # <-- TO REMOVE SECTION'S TITLE
-            # ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
             keep_df = pd.concat(passages_to_keep)
             keep_df = keep_df[~keep_df.index.duplicated(keep="first")]
             drop_df = drop_df[~drop_df.index.isin(keep_df.index)]
@@ -483,7 +480,7 @@ class NoiseReducer:
 
         # Skip numbered instances, because these are not actually subtitles (so
         # should NOT be removed).
-        numbered_text = subtitles[subtitles.text.str.match("^\d", case=False)]
+        numbered_text = subtitles[subtitles.text.str.match(r"^\d", case=False)]
         subtitles = subtitles[~subtitles.index.isin(numbered_text.index)]
 
         # Skip instances ending with colon (":") – they are, virtually, not subtitles.
@@ -511,7 +508,7 @@ class NoiseReducer:
             (~df.nlp_doc.apply(lambda x: self._safe_check_if_is_punct(x)))
             & (df.nlp_doc.apply(lambda x: self._safe_check_if_is_word(x)))
             & (
-                ~df.text.str.match(pat="^([0-9]+[\)|\s\-]\s?|[a-z]+\)\s?)", case=True)
+                ~df.text.str.match(pat=r"^([0-9]+[\)|\s\-]\s?|[a-z]+\)\s?)", case=True)
             )  # Check if starts with list ordering
         ]
         return random_subtitles[
@@ -559,18 +556,18 @@ class NoiseReducer:
         return text_series[
             (~nlp_docs_series.apply(lambda x: self._safe_check_if_is_punct(x)))
             & (nlp_docs_series.apply(lambda x: self._safe_check_if_is_word(x)))
-            & (~text_series.str.match(pat="^([0-9]+\s\-\s?|[a-z]+\)\s?)", case=True))
+            & (~text_series.str.match(pat=r"^([0-9]+\s\-\s?|[a-z]+\)\s?)", case=True))
             & (
                 text_series.str.match(
                     pat="|".join(
                         [
-                            "^Republicação (.*) Decreto-Lei n\.(.*)$",
+                            r"^Republicação (.*) Decreto-Lei n\.(.*)$",
                         ]
                     )
                 )
             )
             & (
-                ~text_series.str.match(pat="^Regulamento interno$")
+                ~text_series.str.match(pat=r"^Regulamento interno$")
             )  # TODO: TEMPORARY SOLUTION; IMPROVE
         ]
 
@@ -648,14 +645,14 @@ class NoiseReducer:
         Passages that serve as image caption, alt-labels for tables, a few random
         subtitles, and more...
         """
-        pat = "^\(.*\)$"
+        pat = r"^\(.*\)$"
         return df.text[df.text.str.match(pat=pat)]
 
     # --------------------------------------------------------------------------- #
     def _search_notes_passages(self, df: pd.DataFrame | None = None, *args):
         if df is None:
             df = self.corpora
-        pat = "^Nota(\.|\s\d+\.?)?\s\-"
+        pat = r"^Nota(\.|\s\d+\.?)?\s\-"
         return df[df.text.str.match(pat)].text
 
     # --------------------------------------------------------------------------- #
@@ -663,7 +660,7 @@ class NoiseReducer:
         """
         'Unaltered' and 'Revoked' passages
         """
-        pat = "^([0-9]+\s\-\s?|[a-z]+\)\s?)?(\[.*\]|\(.*\))[:;»\.]?$"
+        pat = r"^([0-9]+\s\-\s?|[a-z]+\)\s?)?(\[.*\]|\(.*\))[:;»\.]?$"
         return df.text[df.text.str.match(pat=pat)]
 
     # --------------------------------------------------------------------------- #
@@ -758,7 +755,10 @@ class NoiseReducer:
             if section.delimiter
             else doc_titles.index[doc_titles.index > starting_index][0]
         )
-        return doc_df.text[list(range(starting_index, ending_index))]
+        
+        # To remove section's title -> ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        return doc_df.text[list(range((starting_index + 1), ending_index))]
+
 
     # ===================================================================================== #
     # UTILITY SCRIPTS
