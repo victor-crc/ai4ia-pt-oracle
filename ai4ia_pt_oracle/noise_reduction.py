@@ -417,6 +417,9 @@ class NoiseReducer:
                 )
                 for section in sections
             ]
+            # ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+            passages_to_keep = passages_to_keep.iloc[1:]  # <-- TO REMOVE SECTION'S TITLE
+            # ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
             keep_df = pd.concat(passages_to_keep)
             keep_df = keep_df[~keep_df.index.duplicated(keep="first")]
             drop_df = drop_df[~drop_df.index.isin(keep_df.index)]
@@ -747,7 +750,7 @@ class NoiseReducer:
         if not section.delimiter:
             assert (
                 doc_titles is not None
-            ), "To remove a specific section (i.e., `Section.delimiter=False`), than `doc_titles` should be passed."
+            ), "To identify a specific section (i.e., `Section.delimiter=False`), than `doc_titles` should be passed."
         section_matches = doc_df[doc_df.text.str.fullmatch(pat=section.pat)]
         starting_index = section_matches.iloc[section.idx].name
         ending_index = (
